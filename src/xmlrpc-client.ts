@@ -50,7 +50,12 @@ export class XmlRpcClient {
     params: unknown
   ): Promise<unknown> {
     const xml = this.objectToXml(method, params);
-    console.log(`Endpoint: ${this.endpoint}, ${method}, request: ${xml}`, params);
+    if (method === 'wp.uploadFile') {
+      console.log(`Endpoint: ${this.endpoint}, ${method}, requestSize: ${xml.length}`, params);
+    }else{
+      console.log(`Endpoint: ${this.endpoint},${method}, request: ${xml}`, params);
+    }
+    
     return request({
       url: this.endpoint,
       method: 'POST',
@@ -153,7 +158,7 @@ export class XmlRpcClient {
         .children[0];
       response = this.fromElement(responseValue);
     }
-    console.log(`response: ${xml}`, response);
+    //console.log(`response: ${xml}`, response);
     return response;
   }
 

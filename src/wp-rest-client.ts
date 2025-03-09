@@ -171,6 +171,7 @@ export class WpRestClient extends AbstractWordPressClient {
 
   async uploadMedia(media: Media, certificate: WordPressAuthParams): Promise<WordPressClientResult<WordPressMediaUploadResult>> {
     try {
+      console.log('uploadMedia', media);
       const formItems = new FormItems();
       formItems.append('file', media);
 
